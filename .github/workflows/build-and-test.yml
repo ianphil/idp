@@ -10,6 +10,7 @@ on:
 
 env:
   DOTNET_VERSION: '8.0.203' # The .NET SDK version to use
+  OWNER: 'ianphil' # The owner of the repository
 
 jobs:
   build-and-test:
@@ -35,3 +36,11 @@ jobs:
     
     - name: Test
       run: dotnet test --no-restore --verbosity normal lib/lib.sln
+
+    - name: Pack NuGet package
+      run: dotnet pack lib/Idp.Lib.Tools/Idp.Lib.Tools.csproj --configuration Release --output ./nupkg
+
+    - name: Publish NuGet package
+      env:
+        NUGET_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push ./nupkg/*.nupkg --source https://nuget.pkg.github.com/${{ env.OWNER }}/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
