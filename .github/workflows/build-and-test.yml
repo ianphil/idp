@@ -2,11 +2,17 @@ name: build and test
 
 on:
   push:
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
     paths:
-    - '**.cs'
-    - '**.csproj'
+      - '**/*.cs'
+      - '**/*.csproj'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.cs'
+      - '**/*.csproj'
 
 env:
   DOTNET_VERSION: '8.0.203' # The .NET SDK version to use
@@ -18,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest] #, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@v3
@@ -60,4 +66,4 @@ jobs:
     - name: Publish NuGet package
       env:
         NUGET_API_KEY: ${{ secrets.GH_PACKAGES_TOKEN }}
-      run: dotnet nuget push ./nupkg/*.nupkg --source https://nuget.pkg.github.com/${{ env.OWNER }}/index.json --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
+      run: dotnet nuget push ./nupkg/*.nupkg --source https://nuget.pkg.github.com/${{ env.OWNER }}/index.json --api-key ${{ secrets.GH_PACKAGES_TOKEN }} --skip-duplicate
