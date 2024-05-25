@@ -20,6 +20,7 @@ public class AzureService
 
     public ResourceGroupResource GetResourceGroup(string resourceGroupName)
     {
+        // Construct the resource identifier
         var resourceId = MakeResourceGroupResourceIdentifier(resourceGroupName);
         return _armClient.GetResourceGroupResource(resourceId);
     }
