@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <PackageId>Idp.Lib.Tools</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Authors>Ian Philpot</Authors>
     <Company>Giant Computer Co.</Company>
     <PackageDescription>Tools for the IDP</PackageDescription>
