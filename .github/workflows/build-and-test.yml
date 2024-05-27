@@ -1,18 +1,18 @@
-name: build and test
+name: IDP Lib Build and Test
 
 on:
   push:
     branches:
       - master
     paths:
-      - '**/*.cs'
-      - '**/*.csproj'
+      - 'lib/**/*.cs'
+      - 'lib/**/*.csproj'
   pull_request:
     branches:
       - master
     paths:
-      - '**/*.cs'
-      - '**/*.csproj'
+      - 'lib/**/*.cs'
+      - 'lib/**/*.csproj'
   workflow_dispatch:
 
 env:
